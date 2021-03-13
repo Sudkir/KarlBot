@@ -1,5 +1,7 @@
 /*команды для запуска бота вводить по порядку
 
+ODE5NjQ0NDY5MjY3MDA1NDUx.YEpnZQ.FFJInW1k9g1EkLzgYey4XkUNCUs
+
   npm install 
   npm install discord.js  
 
