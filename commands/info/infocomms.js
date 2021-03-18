@@ -80,12 +80,4 @@ var comms_list = [{
   }
 ]
 
-
-
- 
-  
-  
-
-
-//
   module.exports.comms = comms_list;

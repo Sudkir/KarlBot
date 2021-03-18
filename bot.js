@@ -3,7 +3,10 @@
 ODE5NjQ0NDY5MjY3MDA1NDUx.YEpnZQ.FFJInW1k9g1EkLzgYey4XkUNCUs
 
   npm install 
-  npm install discord.js  
+  npm install discord.js 
+  npm i discord-role-manager 
+
+  npm install mssql
 
   старт бота 
   node bot.js  
@@ -11,6 +14,12 @@ ODE5NjQ0NDY5MjY3MDA1NDUx.YEpnZQ.FFJInW1k9g1EkLzgYey4XkUNCUs
 
   coins.json-монеты
   xp.json-опыт
+
+
+  лок сервер
+  DESKTOP-PDVP2LN\SQLEXPRESS
+  
+  KarlBotDB
 */
 
 
@@ -52,11 +61,30 @@ robot.on("ready", function() {
   console.log("https://discord.com/api/oauth2/authorize?client_id=819644469267005451&permissions=8&scope=bot")
   robot.generateInvite(['KICK_MEMBERS', 'BAN_MEMBERS', 'SEND_MESSAGES',"ADMINISTRATOR"]).then((link) => { 
     console.log(link);})
+// message.member.addRole('id'); rol add  .roles
+
+    //console.log(robot.guilds.cache.get(robot.guilds.id).roles)
+    console.log(robot.guilds);//вывод в консоль всей инфы
+    
 });
 
 
+//
+
+const { RoleManger } = require('discord-role-manager')//подключения манагера ролей
+const roleManger = new RoleManger(robot, {
+	storagePath: './roleStorage.json',
+	localization: 'ru' //Available localization is: ru; en. If you want to change localization or add your own language, go to the package dir and change localization.json
+});
+robot.roleManger = roleManger;
+//
 
 robot.on('message', (msg) => { // Реагирование на сообщения
+//добавление роли не работает
+  if (msg.content.startsWith('!addRole')) robot.roleManger.addRole(msg).catch(errorMessage => {
+		errorMessage.delete({ timeout: 1000 });
+	}) //Add new role to ./roleStorage.json and catch eroor message
+
   if (msg.author.username != robot.user.username && msg.author.discriminator != robot.user.discriminator) {
     var comm = msg.content.trim() + " ";
     var comm_name = comm.slice(0, comm.indexOf(" "));
@@ -113,7 +141,7 @@ robot.on('message', (msg) => { // Реагирование на сообщени
   .setColor("#0000FF")
   .addField("💸", `${coinAmt} coins added!`);
 
-  msg.channel.send(coinEmbed).then(msg => {msg.delete(5000)});
+  msg.channel.send(coinEmbed).then(msg => {msg.delete()});//задержка 5000
   }
 
   let xpAdd = Math.floor(Math.random() * 7) + 8;
@@ -138,7 +166,7 @@ robot.on('message', (msg) => { // Реагирование на сообщени
     .setColor(purple)
     .addField("New Level", curlvl + 1);
 
-    mess.channel.send(lvlup).then(msg => {msg.delete(5000)});
+    msg.channel.send(lvlup).then(msg => {msg.delete()});//задержка 5000
 
 
   }
@@ -165,6 +193,7 @@ robot.on('message', (msg) => { // Реагирование на сообщени
 
 кусок который нужно поченить end
 */
+
 
 });
 

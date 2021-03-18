@@ -9,6 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^12.5.1"
+    "discord-role-manager": "^1.2.5",
+    "discord.js": "^12.5.1",
+    "mssql": "^6.3.1"
   }
 }

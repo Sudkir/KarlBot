@@ -66,6 +66,12 @@ function hello(robot, mess, args) {//здоровыется с пользова�
 }
 
 
+//
+
+
+
+//
+
 //тестовая команда о работе бота
 function test(robot, mess, args) {
   mess.delete().catch() 
